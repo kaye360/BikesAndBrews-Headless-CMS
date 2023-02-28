@@ -1,0 +1,55 @@
+---
+import type { GQLNode } from "../lib/types";
+
+export const prerender = true;
+import { getNodeByURI, getAllUris } from "../lib/api";
+import BaseLayout from "../layout/BaseLayout.astro";
+
+
+const uri = `/${Astro.params.uri}/`;
+const data = await getNodeByURI(uri);
+const node: GQLNode = data.nodeByUri;
+
+export async function getStaticPaths(){
+    return await getAllUris();
+}
+
+
+const Post = 'Post'
+const Page = 'Page'
+const Archive = 'Archive'
+
+function resolveContentTemplate(node: GQLNode){ 
+    let template;
+    switch(node.__typename){
+        case 'Post':
+            template = Post;
+            break; 
+        case 'Page':
+            template = Page;
+            break; 
+        case 'Category':
+            template = Archive;
+            break; 
+        case 'Tag':
+            template = Archive;
+            break; 
+        default: 
+            template = Post;
+    }
+
+    return template;
+}
+
+const Template = resolveContentTemplate(node)
+
+---
+
+<BaseLayout title={node.title || 'Tri City Bikes & Brew'}>
+    
+    {Template}
+    
+
+    <div set:html={node.content}></div>
+
+</BaseLayout>

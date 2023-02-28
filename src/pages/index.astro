@@ -1,28 +1,20 @@
 ---
 
-import NavLinkList from "../Components/NavLinkList.astro";
-import PostExcerpt from "../Components/PostExcerpt.astro";
-import { getAllPosts } from "../lib/api";
+import BaseLayout from "../layout/BaseLayout.astro";
+import { homePagePostsQuery } from "../lib/api";
 
-const posts: object[] = await getAllPosts()
-
+const data = await homePagePostsQuery()
+const posts = data.posts.nodes
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
+<BaseLayout title="Home">
 
-		<NavLinkList />
+	{posts.map( (post:{ uri:string, title:string }) => (
+		<pre>
+			{ JSON.stringify(post, null, 2) }
+			
+		</pre>
+		<a href={post.uri}>{post.title}</a>
+	))}
+</BaseLayout>
 
-		{posts.map( post => (
-			<PostExcerpt post={post} />
-		))}
-	</body>
-</html>

@@ -1,72 +1,191 @@
-import type { Page } from "./types"
+const WORDPRESS_API_URL = 'https://bikesandbrews.ca/graphql'
 
-const WORDPRESS_API_URL = 'https://bikesandbrews.ca/wp-json/wp/v2'
-
-
-export async function getSiteData() 
-{
-    const res = await fetch('https://bikesandbrews.ca/wp-json')
-    const json = await res.json()
-    return json
+export async function navQuery(){
+    const siteNavQueryRes = await fetch(WORDPRESS_API_URL, {
+        method: 'post', 
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            query: `{
+                menus {
+                  nodes {
+                    name
+                    menuItems {
+                        nodes {
+                            uri
+                            url
+                            order
+                            label
+                        }
+                    }
+                  }
+                }
+                generalSettings {
+                    title
+                    url
+                    description
+                }
+            }
+            `
+        })
+    });
+    const{ data } = await siteNavQueryRes.json();
+    return data;
 }
 
-export async function getAllPosts() : Promise<object[]>
-{
-    const res = await fetch(WORDPRESS_API_URL + '/posts')
-    const json = await res.json()
-    return json
+export async function homePagePostsQuery(){
+    const response = await fetch(WORDPRESS_API_URL, {
+        method: 'post', 
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            query: `{
+                posts {
+                  nodes {
+                    date
+                    uri
+                    title
+                    commentCount
+                    excerpt
+                    categories {
+                      nodes {
+                        name
+                        uri
+                      }
+                    }
+                    featuredImage {
+                      node {
+                        mediaItemUrl
+                        altText
+                      }
+                    }
+                  }
+                }
+              }
+            `
+        })
+    });
+    const{ data } = await response.json();
+    return data;
 }
 
-export async function getPostsByTag(tag : string) 
+
+export async function getNodeByURI(uri: string) 
 {
-    /**
-     * @todo need to convert the string tag to it's WP id which takes a number
-     */
-    const res = await fetch(WORDPRESS_API_URL + '/posts?tags=' + tag)
-    const json = await res.json()
-    return json
+    const response = await fetch(WORDPRESS_API_URL, {
+        method: 'post', 
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            query: `query GetNodeByURI($uri: String!) {
+                nodeByUri(uri: $uri) {
+                  __typename
+                  isContentNode
+                  isTermNode
+                  ... on Post {
+                    id
+                    title
+                    date
+                    uri
+                    excerpt
+                    content
+                    categories {
+                      nodes {
+                        name
+                        uri
+                      }
+                    }
+                    featuredImage {
+                      node {
+                        mediaItemUrl
+                        altText
+                      }
+                    }
+                  }
+                  ... on Page {
+                    id
+                    title
+                    uri
+                    date
+                    content
+                  }
+                  ... on Category {
+                    id
+                    name
+                    posts {
+                      nodes {
+                        date
+                        title
+                        excerpt
+                        uri
+                        categories {
+                          nodes {
+                            name
+                            uri
+                          }
+                        }
+                        featuredImage {
+                          node {
+                            altText
+                            mediaItemUrl
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            variables: {
+                uri: uri
+            }
+        })
+    });
+    const{ data } = await response.json();
+    return data;
 }
 
-export async function getPostsByCategory(cat : string) 
-{
-    /**
-     * @todo need to convert the string cat to it's WP id which takes a number
-     */
-    const res = await fetch(WORDPRESS_API_URL + '/posts?categories=' + cat)
-    const json = await res.json()
-    return json
-}
+export async function getAllUris(){
+  const response = await fetch(WORDPRESS_API_URL, {
+      method: 'post', 
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+          query: `query GetAllUris {
+            terms {
+              nodes {
+                uri
+              }
+            }
+            posts(first: 100) {
+              nodes {
+                uri
+              }
+            }
+            pages(first: 100) {
+              nodes {
+                uri
+              }
+            }
+          }
+          `
+      })
+  });
+  const{ data } = await response.json();
+  // @ts-ignore
+  const uris = Object.values(data)
+  // @ts-ignore
+  .reduce(function(acc: string, currentValue: object[]){
+    // @ts-ignore
+    return acc.concat(currentValue.nodes)
+  }, [])
+  // @ts-ignore
+  .filter(node => node.uri !== null)
+  // @ts-ignore
+    .map(node => {
+      let trimmedURI = node.uri.substring(1);
+      trimmedURI = trimmedURI.substring(0, trimmedURI.length - 1)
+      return {params: {
+        uri: trimmedURI
+      }}
+    })
 
-export async function getPages(): Promise<Page[]>
-{
-    const res = await fetch(WORDPRESS_API_URL + '/pages')
-    const json = await res.json()
-    return json
-}
+  return uris;
 
-export async function getPage() 
-{
-    /**
-     * @todo get a single page
-     */
-    const res = await fetch(WORDPRESS_API_URL + '/pages')
-    const json = await res.json()
-    return json
-}
-
-export async function getTags() 
-{
-
-    return []
-}
-
-export async function getCategories() 
-{
-
-    return []
-}
-
-export async function getNav() {
-
-    return []
 }
