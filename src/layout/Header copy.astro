@@ -11,13 +11,17 @@ const siteInfo: SiteInfo = res.generalSettings
 
 
 <header>
-    <a href="/" class="logo-link">
-        <span class="logo-tc">Tri-City</span>
-        <img src="/img/logo.png" />
-        <span class="logo-bb">Bikes & Brews</span>
-    </a>
     <nav>
+        <div>
+            <a href="/" class="logo-link">
+                <img src="/img/logo.png" />
+                <div class="logo-text">
+                    <span class="logo-tc">Tri-City</span>
+                    <span class="logo-bb">Bikes & Brews</span>
+                </div>
+            </a>
 
+        </div>
         <ul>
             { primaryMenu.menuItems.nodes.map( (menuItem: MenuItem) => (
                 <li>
@@ -37,10 +41,7 @@ header {
     margin-inline: auto;
     padding-inline : 1rem;
     padding-block : 1rem;
-    background: linear-gradient(
-        transparent,
-        hsl( var(--color-secondary-100), 0.15 )
-    );
+    /* background-color : hsl( var(--color-primary-500), 0.05 ) */
 }
 
 nav {
@@ -53,19 +54,7 @@ ul {
     display : flex;
     gap : 1rem;
     align-items: center;
-    justify-content: center;
-    width : 100%;
-    margin-top : 0.5rem;
     list-style-type: none;
-}
-
-li {
-    padding-right: 1rem;
-    border-right : 2px solid hsl( var(--color-secondary-500), 0.2 )
-}
-li:last-child {
-    padding : 0;
-    border : 0;
 }
 
 a {
@@ -73,16 +62,8 @@ a {
 }
 
 li a {
-    display : inline-block;
-    padding-block : 0.2rem;
-    font-size: 1.1rem;
     color : hsl( var(--color-secondary-300) );
     font-weight : bold;
-}
-
-li a:hover {
-    color : hsl( var(--color-primary-300) );
-    text-decoration : underline
 }
 
 </style>
@@ -91,11 +72,13 @@ li a:hover {
 
 .logo-link {
     display : flex;
-    justify-content: center;
     align-items: center;
     gap : 1rem;
-    margin-inline: auto;
     color : #333;
+}
+
+.logo-tc, .logo-bb {
+    display : block;
 }
 
 .logo-tc {
@@ -105,8 +88,7 @@ li a:hover {
 
 .logo-bb {
     font-family : 'Intro Script';
-    font-size: 1.7rem;
-    font-weight: bold;
+    font-size: 1.4rem;
 }
 
 
