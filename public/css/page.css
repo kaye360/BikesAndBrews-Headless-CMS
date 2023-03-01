@@ -1,0 +1,13 @@
+.page-main {
+    min-height : 150vh;
+
+    background-color: #fff;
+    background-image: url(../img/logo-large-grey.png);
+    background-repeat: no-repeat;
+    background-position: right -70% top;
+}
+
+
+main p { 
+    margin-bottom : 1.7rem;
+}

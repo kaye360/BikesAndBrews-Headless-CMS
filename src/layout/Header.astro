@@ -13,9 +13,15 @@ const siteInfo: SiteInfo = res.generalSettings
 <header>
     <nav>
         <div>
-            <a href="/" class='site-name'>{siteInfo.title}</a>
+            <a href="/" class="logo-link">
+                <img src="/img/logo.png" />
+                <div class="logo-text">
+                    <span class="logo-tc">Tri-City</span>
+                    <span class="logo-bb">Bikes & Brews</span>
+                </div>
+            </a>
+
         </div>
-        {primaryMenu.name}
         <ul>
             { primaryMenu.menuItems.nodes.map( (menuItem: MenuItem) => (
                 <li>
@@ -25,3 +31,59 @@ const siteInfo: SiteInfo = res.generalSettings
         </ul>
     </nav>
 </header>
+
+
+<style is:inline>
+
+header {
+    width : 100%;
+    max-width: var(--page-max-width);
+    margin-inline: auto;
+    margin-block : 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul {
+    display : flex;
+    gap : 1rem;
+    align-items: center;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+li a {
+    color : var(--color-secondary-300);
+    font-weight : bold;
+}
+
+.logo-link {
+    display : flex;
+    align-items: center;
+    gap : 1rem;
+    color : #333;
+}
+
+.logo-tc, .logo-bb {
+    display : block;
+}
+
+.logo-tc {
+    font-family: 'Intro Rust';
+    font-size: 1.6rem;
+}
+
+.logo-bb {
+    font-family : 'Intro Script';
+    font-size: 1.4rem;
+}
+
+
+</style>

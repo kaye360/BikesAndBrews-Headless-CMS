@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk&display=swap');
+
+@import "./header-top.css";
+@import "./hero.css";
+@import "./home.css";
+@import "./page.css";
+@import "./footer.css";
+@import "./utils.css";
+
+
+*, *::before, *::after, html, body {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    /* outline : 1px solid tomato; */
+}
+
+:root {
+    --color-primary-100 : hsl(204, 45%, 75%);
+    --color-primary-200 : hsl(204, 45%, 50%);
+    --color-primary-300 : hsl(204, 45%, 25%);
+    --color-primary-400 : hsl(204, 46%, 15%);
+    --color-primary-500 : hsl(204, 46%, 5%);
+    
+    --color-secondary-100 : hsl(7, 66%, 75%);
+    --color-secondary-200 : hsl(7, 66%, 65%);
+    --color-secondary-300 : hsl(7, 66%, 44%);
+    --color-secondary-400 : hsl(7, 66%, 30%);
+    --color-secondary-500 : hsl(7, 66%, 10%);
+
+    --font-h1 : "Intro Rust", 'Hanken Grotesk', Helvetica, sans-serif;
+    --font-h2 : "Intro Script", 'Hanken Grotesk', Helvetica, sans-serif;
+    --font-main : 'Hanken Grotesk', Helvetica, sans-serif;
+
+    --page-max-width : 1300px;
+
+    font-family: var(--font-main);
+}
+
+@font-face {
+    font-family: "Intro Rust";
+    src : url(/font/IntroRustG.otf);
+}
+
+@font-face {
+    font-family: "Intro Script";
+    src: url(/font/IntroScriptR.otf)
+}
+
+
+p {
+    line-height : 1.7rem;
+    letter-spacing: 0.05rem;
+}
+
+

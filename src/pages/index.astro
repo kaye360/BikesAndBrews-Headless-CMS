@@ -1,20 +1,16 @@
 ---
 
 import BaseLayout from "../layout/BaseLayout.astro";
-import { homePagePostsQuery } from "../lib/api";
+import { getHomePage } from "../lib/api";
 
-const data = await homePagePostsQuery()
-const posts = data.posts.nodes
+const homePage = await getHomePage()
+const homePageContent = homePage[0].content.rendered
 ---
 
 <BaseLayout title="Home">
 
-	{posts.map( (post:{ uri:string, title:string }) => (
-		<pre>
-			{ JSON.stringify(post, null, 2) }
-			
-		</pre>
-		<a href={post.uri}>{post.title}</a>
-	))}
+	<div set:html={homePageContent}></div>
+
 </BaseLayout>
+
 

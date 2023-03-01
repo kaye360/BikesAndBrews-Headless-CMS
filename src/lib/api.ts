@@ -1,3 +1,4 @@
+
 const WORDPRESS_API_URL = 'https://bikesandbrews.ca/graphql'
 
 export async function navQuery(){
@@ -32,7 +33,15 @@ export async function navQuery(){
     return data;
 }
 
-export async function homePagePostsQuery(){
+export async function getHomePage()
+{
+  const res = await fetch('https://bikesandbrews.ca/wp-json/wp/v2/pages?slug=home-page')
+  const json = await res.json()
+  return json
+}
+
+export async function homePagePostsQuery(): Promise<any>
+{
     const response = await fetch(WORDPRESS_API_URL, {
         method: 'post', 
         headers: {'Content-Type':'application/json'},

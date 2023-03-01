@@ -30,3 +30,14 @@ export interface GQLNode {
     date?: string,
     content?: string
 }
+
+export interface GQLPostExcerpt {
+    date?: string,
+    uri?: string,
+    title?: string,
+    excerpt?: string,
+    categories?: {
+        nodes:[{ name: string, uri: string }]
+    },
+    featuredImage: string | null
+}

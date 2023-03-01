@@ -1,0 +1,20 @@
+---
+import type { GQLPostExcerpt } from '../lib/types';
+
+interface Props {
+    post: GQLPostExcerpt
+}
+
+const {post} = Astro.props
+---
+
+<article>
+    <h3>{post.title}</h3>
+
+    <span>{post.date}</span>
+
+    <p set:html={post.excerpt}></p>
+
+    <a href={post.uri}>Read More</a>
+
+</article>
