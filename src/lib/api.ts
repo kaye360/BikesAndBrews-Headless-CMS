@@ -31,6 +31,7 @@ export async function navQuery(){
     });
     const{ data } = await siteNavQueryRes.json();
     return data;
+
 }
 
 export async function getHomePage()
@@ -190,11 +191,14 @@ export async function getAllUris(){
     .map(node => {
       let trimmedURI = node.uri.substring(1);
       trimmedURI = trimmedURI.substring(0, trimmedURI.length - 1)
+
+      if (trimmedURI === "") trimmedURI = 'home-page'
       return {params: {
         uri: trimmedURI
       }}
     })
 
+  console.log(uris)
   return uris;
 
 }
