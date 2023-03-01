@@ -6,42 +6,42 @@ import { getNodeByURI, getAllUris } from "../lib/api";
 import BaseLayout from "../layout/BaseLayout.astro";
 
 
-const uri = `/${Astro.params.uri}/`;
-const data = await getNodeByURI(uri);
-const node: GQLNode = data.nodeByUri;
+// const uri = `/${Astro.params.uri}/`;
+// const data = await getNodeByURI(uri);
+// const node: GQLNode = data.nodeByUri;
 
 export async function getStaticPaths(){
     return await getAllUris();
 }
 
 
-const Post = 'Post'
-const Page = 'Page'
-const Archive = 'Archive'
+// const Post = 'Post'
+// const Page = 'Page'
+// const Archive = 'Archive'
 
-function resolveContentTemplate(node: GQLNode){ 
-    let template;
-    switch(node.__typename){
-        case 'Post':
-            template = Post;
-            break; 
-        case 'Page':
-            template = Page;
-            break; 
-        case 'Category':
-            template = Archive;
-            break; 
-        case 'Tag':
-            template = Archive;
-            break; 
-        default: 
-            template = Post;
-    }
+// function resolveContentTemplate(node: GQLNode){ 
+//     let template;
+//     switch(node.__typename){
+//         case 'Post':
+//             template = Post;
+//             break; 
+//         case 'Page':
+//             template = Page;
+//             break; 
+//         case 'Category':
+//             template = Archive;
+//             break; 
+//         case 'Tag':
+//             template = Archive;
+//             break; 
+//         default: 
+//             template = Post;
+//     }
 
-    return template;
-}
+//     return template;
+// }
 
-const Template = resolveContentTemplate(node)
+// const Template = resolveContentTemplate(node)
 
 ---
 
