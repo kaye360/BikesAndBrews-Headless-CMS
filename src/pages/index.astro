@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro";
 import { getHomePage } from "../lib/api";
-// const homePage = await getHomePage()
-// const homePageContent = homePage[0].content.rendered
+const homePage = await getHomePage()
+const homePageContent = homePage[0].content.rendered
 ---
-<!-- <BaseLayout title="Home"> -->
-	<!-- <div set:html={homePageContent}></div> -->
+<BaseLayout title="Home">
+	<div set:html={homePageContent}></div>
 	<div>
 		Home Page
 	</div>
-<!-- </BaseLayout> -->
+</BaseLayout>
