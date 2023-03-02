@@ -4,6 +4,7 @@
 @import "./page.css";
 @import "./footer.css";
 @import "./utils.css";
+@import "./wp-overwrites.css";
 
 
 *, *::before, *::after, html, body {
@@ -54,4 +55,13 @@ p {
     letter-spacing: 0.05rem;
 }
 
+
+a {
+    color : hsl( var(--color-secondary-300) );
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
 

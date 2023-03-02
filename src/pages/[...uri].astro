@@ -60,11 +60,11 @@ const Archive = 'Archive'
 
 ---
 
-<BaseLayout title={'Title'}>
+<BaseLayout title={`${node.title || 'TC Bikes and Brews'} - Tri-City Bikes and Brews`}>
 
-    <h2 set:html={node.title}></h2>
+    <!-- <h2 set:html={node.title}></h2> -->
 
-    <div set:html={node.content}></div>
+    <!-- <div set:html={node.content}></div> -->
 
 </BaseLayout>
 
@@ -73,7 +73,7 @@ const Archive = 'Archive'
 
 h2 {
     margin-bottom: 1rem;
-    padding : 1rem;
+    padding-block : 1rem;
     font-size : 2.5rem;
     font-weight: bold;
     letter-spacing: 0.1rem;

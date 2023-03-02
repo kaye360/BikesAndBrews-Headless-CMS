@@ -1,0 +1,30 @@
+ul.is-flex-container {
+    row-gap: 3rem !important;
+}
+
+.wp-block-post-excerpt__excerpt {
+    display : none;
+}
+
+.wp-block-post-excerpt__more-link {
+    display : inline-block;
+    padding : 0.5rem 1rem;
+
+    background-color: hsl( var(--color-primary-300) );
+    color : #fff;
+}
+
+
+
+
+@media screen and (min-width : 700px) {
+
+    .wp-block-post-excerpt__more-text {
+        margin : 0 0 1rem 0;
+    }
+    .wp-block-post-excerpt__excerpt {
+        display : block;
+        margin-top: 0;
+    }
+
+}
