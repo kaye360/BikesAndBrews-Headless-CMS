@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 import type { GQLNode } from "../lib/types";
 
 import { getNodeByURI, getAllUris } from "../lib/api";
@@ -18,37 +19,41 @@ const Post = 'Post'
 const Page = 'Page'
 const Archive = 'Archive'
 
-function resolveContentTemplate(node: GQLNode){ 
-    let template;
-    switch(node.__typename){
-        case 'Post':
-            template = Post;
-            break; 
-        case 'Page':
-            template = Page;
-            break; 
-        case 'Category':
-            template = Archive;
-            break; 
-        case 'Tag':
-            template = Archive;
-            break; 
-        default: 
-            template = Post;
-    }
+/**
+ * @description 
+ * The following code can be used if different page templates are needed
+ * depending on the type of page (page, post, archive, etc.)
+ * Can reder a dynamic component with <Template></Template>
+ */
+// function resolveContentTemplate(node: GQLNode){ 
+//     let template
 
-    return template;
-}
+//     switch(node.__typename){
+//         case 'Post':
+//             template = Post;
+//             break; 
+//         case 'Page':
+//             template = Page;
+//             break; 
+//         case 'Category':
+//             template = Archive;
+//             break; 
+//         case 'Tag':
+//             template = Archive;
+//             break; 
+//         default: 
+//             template = Post;
+//     }
 
-const Template = resolveContentTemplate(node)
+//     return template;
+// }
+
+// const Template = resolveContentTemplate(node)
 
 ---
 
-<BaseLayout title={node.title || 'Tri City Bikes & Brews'}>
+<BaseLayout title={'Title'}>
     
-    {Template}
-    
-
     <div set:html={node.content}></div>
     <div>uri</div>
 
