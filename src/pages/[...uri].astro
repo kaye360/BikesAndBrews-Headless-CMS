@@ -1,5 +1,5 @@
 ---
-export const prerender = true
+// export const prerender = true
 import type { GQLNode } from "../lib/types";
 
 import { getNodeByURI, getAllUris } from "../lib/api";
@@ -9,6 +9,10 @@ import BaseLayout from "../layout/BaseLayout.astro";
 const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node: GQLNode = data.nodeByUri;
+
+// console.log(node.title)
+
+if(!node.content) node.content = 'No content to display'
 
 /**
  * 
@@ -64,7 +68,7 @@ const Archive = 'Archive'
 
     <h2 set:html={node.title}></h2>
 
-    <div set:html={node.content}></div>
+    { node.isContentNode && <div set:html={node.content}></div> }
 
 </BaseLayout>
 

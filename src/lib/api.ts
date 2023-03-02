@@ -41,45 +41,9 @@ export async function getHomePage()
   return json
 }
 
-export async function homePagePostsQuery(): Promise<any>
-{
-    const response = await fetch(WORDPRESS_API_URL, {
-        method: 'post', 
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            query: `{
-                posts {
-                  nodes {
-                    date
-                    uri
-                    title
-                    commentCount
-                    excerpt
-                    categories {
-                      nodes {
-                        name
-                        uri
-                      }
-                    }
-                    featuredImage {
-                      node {
-                        mediaItemUrl
-                        altText
-                      }
-                    }
-                  }
-                }
-              }
-            `
-        })
-    });
-    const{ data } = await response.json();
-    return data;
-}
-
-
 export async function getNodeByURI(uri: string) 
 {
+  console.log(uri)
     const response = await fetch(WORDPRESS_API_URL, {
         method: 'post', 
         headers: {'Content-Type':'application/json'},
@@ -198,6 +162,7 @@ export async function getAllUris(){
       }}
     })
 
+    console.log(uris)
   return uris;
 
 }
