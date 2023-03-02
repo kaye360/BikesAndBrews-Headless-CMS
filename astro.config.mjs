@@ -7,5 +7,5 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   output: 'server',
   adapter: netlify(),
-  site: 'https://bikesandbrews.netlify.app'
+  site: 'https://bikesandbrews.netlify.app/'
 });
