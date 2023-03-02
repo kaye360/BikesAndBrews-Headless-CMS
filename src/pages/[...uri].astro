@@ -10,6 +10,14 @@ const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node: GQLNode = data.nodeByUri;
 
+/**
+ * 
+ * For Dev only. Change absolute links to relative links
+ * 
+ */
+node.content = node.content?.replaceAll('href="https://bikesandbrews.ca/', 'href="/')
+
+
 export async function getStaticPaths(){
     return await getAllUris();
 }
@@ -53,8 +61,25 @@ const Archive = 'Archive'
 ---
 
 <BaseLayout title={'Title'}>
-    
+
+    <h2 set:html={node.title}></h2>
+
     <div set:html={node.content}></div>
-    <div>uri</div>
 
 </BaseLayout>
+
+
+<style>
+
+h2 {
+    margin-bottom: 1rem;
+    padding : 1rem;
+    font-size : 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    color: hsl( var(--color-secondary-400) );
+
+}
+
+
+</style>
