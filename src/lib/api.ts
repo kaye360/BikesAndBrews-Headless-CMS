@@ -198,6 +198,7 @@ export async function getAllUris(){
       }}
     })
 
+    console.log(uris)
   return uris;
 
 }
