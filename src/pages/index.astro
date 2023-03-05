@@ -1,15 +1,16 @@
 ---
 export const prerender = true
 import BaseLayout from "../layout/BaseLayout.astro";
-import { getHomePage } from "../lib/api";
-const homePage = await getHomePage()
-const homePageContent = homePage[0].content.rendered
+// import { getHomePage } from "../lib/api";
+// const homePage = await getHomePage()
+// const homePageContent = homePage[0].content.rendered
 ---
 
 
 <BaseLayout title="Tri-City Bikes and Brews">
 	
-	<div set:html={homePageContent}></div>
+	<!-- <div set:html={homePageContent}></div> -->
+    <p>Home page</p>
 
 </BaseLayout>
 
