@@ -23,7 +23,13 @@ import BaseLayout from "../layout/BaseLayout.astro";
 
 
 export async function getStaticPaths(){
-    return await getAllUris();
+    // return await getAllUris();
+    return [
+        { params: { uri: 'tag/50km' } },
+        { params: { uri: 'tag/0-10km' } },
+        { params: { uri: 'tag/10-20km' } },
+        { params: { uri: 'home-page' } }
+    ]
 }
 
 
