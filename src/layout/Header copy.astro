@@ -2,11 +2,11 @@
 import type { Menu, SiteInfo, MenuItem } from "../lib/types";
 
 
-import { navQuery } from "../lib/api";
+// import { navQuery } from "../lib/api";
 
-const res = await navQuery()
-const primaryMenu = res.menus.nodes.filter((menu: Menu) => menu.name === 'Header')[0]
-const siteInfo: SiteInfo = res.generalSettings
+// const res = await navQuery()
+// const primaryMenu = res.menus.nodes.filter((menu: Menu) => menu.name === 'Header')[0]
+// const siteInfo: SiteInfo = res.generalSettings
 ---
 
 
@@ -23,11 +23,12 @@ const siteInfo: SiteInfo = res.generalSettings
 
         </div>
         <ul>
-            { primaryMenu.menuItems.nodes.map( (menuItem: MenuItem) => (
+            <li>test</li>
+            <!-- { primaryMenu.menuItems.nodes.map( (menuItem: MenuItem) => (
                 <li>
                     <a href={menuItem.uri || '/'} set:html={menuItem.label}></a>
                 </li>
-            ))}
+            ))} -->
         </ul>
     </nav>
 </header>
