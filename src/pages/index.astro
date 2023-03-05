@@ -3,7 +3,14 @@ export const prerender = true
 import BaseLayout from "../layout/BaseLayout.astro";
 import { getHomePage } from "../lib/api";
 const homePage = await getHomePage()
-const homePageContent = homePage[0].content.rendered
+let homePageContent = homePage[0].content.rendered
+
+/**
+ * 
+ * For Dev only. Replace absolute links with relative links
+ * 
+ */
+homePageContent = homePageContent?.replaceAll('href="https://bikesandbrews.ca/', 'href="/')
 ---
 
 

@@ -43,7 +43,6 @@ export async function getHomePage()
 
 export async function getNodeByURI(uri: string) 
 {
-  console.log(uri)
     const response = await fetch(WORDPRESS_API_URL, {
         method: 'post', 
         headers: {'Content-Type':'application/json'},
@@ -162,7 +161,6 @@ export async function getAllUris(){
       }}
     })
 
-    console.log(uris)
   return uris;
 
 }
