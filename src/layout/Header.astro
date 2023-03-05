@@ -19,7 +19,6 @@ const siteInfo: SiteInfo = res.generalSettings
     <nav>
 
         <ul>
-            <!-- <li>test</li> -->
             { primaryMenu.menuItems.nodes.map( (menuItem: MenuItem) => (
                 <li>
                     <a href={menuItem.uri || '/'} set:html={menuItem.label}></a>
