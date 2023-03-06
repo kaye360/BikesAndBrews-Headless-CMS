@@ -1,3 +1,4 @@
+import { render } from "astro/dist/runtime/server"
 
 
 export interface MenuItem {
@@ -20,6 +21,19 @@ export interface SiteInfo {
     description?: string
 }
 
+export interface NavQuery {
+    menus: {
+        nodes: Menu[]
+    },
+    generalSettings: SiteInfo
+}
+
+export interface HomePageQuery {
+    content: {
+        rendered: string
+    }
+}
+
 export interface GQLNode {
     __typename?: string,
     isContentNode?: boolean,
@@ -29,6 +43,10 @@ export interface GQLNode {
     uri?: string,
     date?: string,
     content?: string
+}
+
+export interface GQLNodeByUri {
+    nodeByUri : GQLNode
 }
 
 export interface GQLPostExcerpt {

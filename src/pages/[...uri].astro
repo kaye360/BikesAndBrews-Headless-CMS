@@ -1,16 +1,14 @@
 ---
 export const prerender = true
-import type { GQLNode } from "../lib/types";
+import type { GQLNode, GQLNodeByUri } from "../lib/types";
 
 import { getNodeByURI, getAllUris } from "../lib/api";
 import BaseLayout from "../layout/BaseLayout.astro";
 
 
-const uri = `/${Astro.params.uri}/`;
-const data = await getNodeByURI(uri);
+const uri: string = `/${Astro.params.uri}/`;
+const data: GQLNodeByUri = await getNodeByURI(uri);
 const node: GQLNode = data.nodeByUri;
-
-// console.log(node.title)
 
 if(!node.content) node.content = 'No content to display'
 
@@ -24,18 +22,7 @@ node.content = node.content?.replaceAll('href="https://bikesandbrews.ca/', 'href
 
 export async function getStaticPaths(){
     return await getAllUris();
-    // return [
-    //     { params: { uri: 'tag/50km' } },
-    //     { params: { uri: 'tag/0-10km' } },
-    //     { params: { uri: 'tag/10-20km' } },
-    //     { params: { uri: 'home-page' } }
-    // ]
 }
-
-
-const Post = 'Post'
-const Page = 'Page'
-const Archive = 'Archive'
 
 /**
  * @description 
@@ -71,13 +58,10 @@ const Archive = 'Archive'
 ---
 
 <BaseLayout title={`${node.title || 'TC Bikes and Brews'} - Tri-City Bikes and Brews`}>
-<!-- <BaseLayout title={`${'TC Bikes and Brews'} - Tri-City Bikes and Brews`}> -->
 
     <h2 set:html={node.title}></h2>
-    <!-- <h2>Test title</h2> -->
 
     { node.isContentNode && <div set:html={node.content}></div> }
-    <!-- <p>Content here</p> -->
 </BaseLayout>
 
 

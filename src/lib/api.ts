@@ -1,5 +1,5 @@
 
-const WORDPRESS_API_URL = 'https://bikesandbrews.ca/graphql'
+const WORDPRESS_API_URL: string = 'https://bikesandbrews.ca/graphql'
 
 export async function navQuery(){
     const siteNavQueryRes = await fetch(WORDPRESS_API_URL, {
